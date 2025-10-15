@@ -1062,74 +1062,402 @@
             transform: translateY(0);
         }
 
+        /* Mobile Menu Button */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--primary-gradient);
+            margin: 5px 0;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        /* 移动端菜单背景遮罩 */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-header {
+            padding: 1.5rem;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-close:hover {
+            transform: scale(1.1);
+        }
+
+        .mobile-menu-nav {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .mobile-menu-nav li {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .mobile-menu-nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .mobile-menu-nav a:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding-left: 2rem;
+        }
+
+        .mobile-menu-nav a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary-gradient);
+            transform: scaleY(0);
+            transition: var(--transition);
+        }
+
+        .mobile-menu-nav a:hover::before {
+            transform: scaleY(1);
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            /* Mobile Navigation */
+            .mobile-menu-toggle {
+                display: block;
+            }
+
             .nav-links {
                 display: none;
             }
 
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            /* Hero Section Mobile */
+            .hero {
+                min-height: 100vh;
+                padding: 6rem 0 2rem;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+                margin-bottom: 1.5rem;
+            }
+
             .hero-subtitle {
                 font-size: clamp(0.85rem, 3.5vw, 1.1rem);
-                line-height: 1.3;
-                padding: 0.6rem 1.2rem;
-                gap: 0.25rem;
-                max-width: 98%;
+                line-height: 1.4;
+                padding: 0.8rem 1rem;
+                gap: 0.3rem;
+                max-width: 100%;
+                margin-bottom: 2rem;
+                white-space: normal;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
             }
 
             .hero-subtitle .separator {
-                font-size: 0.85em;
-                margin: 0 0.15rem;
+                display: none;
             }
 
             .hero-subtitle .highlight {
-                padding: 0 0.2rem;
-                font-size: 0.9em;
+                padding: 0.2rem 0.5rem;
+                font-size: 0.95em;
+                margin: 0.2rem 0;
             }
 
+            .hero-subtitle .normal-text {
+                font-size: 0.9em;
+                padding: 0.2rem 0;
+            }
+
+            /* Stats Cards Mobile */
             .hero-stats {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 1.2rem;
+                gap: 1rem;
                 max-width: 100%;
-                padding: 0 1rem;
-                margin-top: 4rem;
+                padding: 0 0.5rem;
+                margin-top: 2rem;
             }
 
             .stat-card {
-                min-height: 120px;
-                padding: 1.5rem 1rem;
+                min-height: 110px;
+                padding: 1.2rem 0.8rem;
+                border-radius: 15px;
             }
 
             .stat-number {
-                font-size: clamp(1.8rem, 5vw, 2.2rem);
-                margin-bottom: 0.6rem;
+                font-size: clamp(1.6rem, 5vw, 2rem);
+                margin-bottom: 0.5rem;
+                font-weight: 900;
             }
 
             .stat-label {
-                font-size: 0.8rem;
-                letter-spacing: 0.05em;
+                font-size: 0.75rem;
+                letter-spacing: 0.02em;
+                line-height: 1.2;
             }
 
             .stat-icon {
-                width: 35px;
-                height: 35px;
-                top: -12px;
-                right: -12px;
-                font-size: 0.9rem;
+                width: 30px;
+                height: 30px;
+                top: -10px;
+                right: -10px;
+                font-size: 0.8rem;
             }
 
-            .features-grid,
-            .tech-grid,
-            .benefits-grid {
-                grid-template-columns: 1fr;
+            /* Sections Mobile */
+            .features,
+            .technology,
+            .benefits,
+            .about,
+            .cta {
+                padding: 4rem 0;
             }
 
             .container {
                 padding: 0 1rem;
             }
 
-            .footer-links {
+            .section-title {
+                font-size: clamp(1.5rem, 6vw, 2.2rem);
+                margin-bottom: 3rem;
+            }
+
+            .features-grid,
+            .tech-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            /* Feature Cards Mobile */
+            .feature-card {
                 flex-direction: column;
+                text-align: center;
                 gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .feature-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .highlight-badge {
+                font-size: 0.8rem;
+                padding: 0.25rem 0.6rem;
+            }
+
+            .feature-content p {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            .feature-list {
+                text-align: left;
+                font-size: 0.85rem;
+            }
+
+            /* Technology Cards Mobile */
+            .tech-item {
+                padding: 1.5rem;
+            }
+
+            .tech-icon {
+                font-size: 2.5rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .tech-content h4 {
+                font-size: 1.2rem;
+            }
+
+            .tech-badge {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.6rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .tech-content p {
+                font-size: 0.85rem;
+                margin-bottom: 1rem;
+            }
+
+            .tech-specs {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
+            .spec-item {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            /* Benefit Cards Mobile */
+            .benefit-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .benefit-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+
+            .benefit-metric {
+                justify-content: center;
+                margin-bottom: 0.8rem;
+            }
+
+            .metric-value {
+                font-size: 2rem;
+            }
+
+            .metric-label {
+                font-size: 0.8rem;
+            }
+
+            .benefit-content h4 {
+                font-size: 1.2rem;
+            }
+
+            .benefit-content p {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            .benefit-features {
+                text-align: left;
+                font-size: 0.85rem;
+            }
+
+            /* About Section Mobile */
+            .about-text p {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 1.5rem;
+            }
+
+            .company-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-item {
+                min-width: 80px;
+            }
+
+            .stat-item .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .stat-item .stat-label {
+                font-size: 0.85rem;
+            }
+
+            /* CTA Section Mobile */
+            .cta h2 {
+                font-size: clamp(1.5rem, 6vw, 2rem);
+                margin-bottom: 1rem;
+            }
+
+            .cta p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
             }
 
             .contact-info {
@@ -1139,52 +1467,58 @@
 
             .cta-button {
                 font-size: 1rem;
-                padding: 0.9rem 2rem;
-            }
-
-            .company-stats {
-                gap: 2rem;
-            }
-
-            .stat-item {
-                min-width: 100px;
-            }
-
-            .stat-item .stat-number {
-                font-size: 2rem;
-            }
-
-            .feature-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-
-            .feature-list {
-                text-align: left;
-            }
-
-            .tech-specs {
-                flex-direction: column;
-                gap: 0.3rem;
-            }
-
-            .benefit-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-
-            .benefit-metric {
+                padding: 0.8rem 1.5rem;
+                width: 100%;
+                max-width: 280px;
                 justify-content: center;
             }
 
-            .metric-value {
-                font-size: 2rem;
+            /* Footer Mobile */
+            footer {
+                padding: 2rem 0;
             }
 
-            .benefit-features {
-                text-align: left;
+            .footer-content {
+                padding: 0 1rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .social-links {
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .social-links a {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            /* Touch Optimizations */
+            .cta-button,
+            .feature-card,
+            .tech-item,
+            .benefit-item {
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+
+            /* Improved Hover States for Touch */
+            @media (hover: none) {
+                .feature-card:hover,
+                .tech-item:hover,
+                .benefit-item:hover {
+                    transform: none;
+                }
+
+                .stat-card:hover {
+                    transform: none;
+                }
             }
         }
 
@@ -1341,8 +1675,31 @@
                 <li><a href="#benefits">价值优势</a></li>
                 <li><a href="#contact">联系我们</a></li>
             </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <h3>导航菜单</h3>
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close mobile menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-menu-nav">
+            <li><a href="#home" class="mobile-nav-link">首页</a></li>
+            <li><a href="#features" class="mobile-nav-link">功能特色</a></li>
+            <li><a href="#technology" class="mobile-nav-link">核心技术</a></li>
+            <li><a href="#benefits" class="mobile-nav-link">价值优势</a></li>
+            <li><a href="#contact" class="mobile-nav-link">联系我们</a></li>
+        </ul>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -1996,11 +2353,91 @@
             }
         });
 
-        // Mobile menu toggle (if needed in future)
+        // 移动端菜单控制
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
         function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('active');
+            const isOpen = mobileMenu.classList.contains('active');
+
+            if (isOpen) {
+                // 关闭菜单
+                mobileMenu.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                document.body.style.overflow = 'auto'; // 恢复滚动
+            } else {
+                // 打开菜单
+                mobileMenu.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+                document.body.style.overflow = 'hidden'; // 防止背景滚动
+            }
         }
+
+        // 菜单按钮点击事件
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        }
+
+        // 关闭按钮点击事件
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', toggleMobileMenu);
+        }
+
+        // 背景遮罩点击事件
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+        }
+
+        // 导航链接点击事件 - 点击后关闭菜单
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+
+                // 关闭菜单
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+
+                // 平滑滚动到目标区域
+                if (targetId && targetId.startsWith('#')) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80; // 考虑导航栏高度
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // 处理导航栏滚动效果
+        let lastScrollTop = 0;
+        const navigation = document.querySelector('nav');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // 添加滚动时的阴影效果
+            if (scrollTop > 10) {
+                navigation.style.background = 'rgba(255, 255, 255, 0.98)';
+                navigation.style.backdropFilter = 'blur(20px)';
+                navigation.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                navigation.style.background = 'rgba(255, 255, 255, 0.95)';
+                navigation.style.backdropFilter = 'blur(20px)';
+                navigation.style.boxShadow = 'none';
+            }
+
+            lastScrollTop = scrollTop;
+        });
 
         // Add touch support for mobile devices
         if ('ontouchstart' in window) {
