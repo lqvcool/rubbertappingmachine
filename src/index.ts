@@ -7,6 +7,9 @@ const __dirname = path.dirname(__filename)
 
 const app = express()
 
+n// Serve static files from public directory
+app.use(express.static(path.join(__dirname, "..", "public")))
+
 // Home route - HTML
 app.get('/', (req, res) => {
   res.type('html').send(`
